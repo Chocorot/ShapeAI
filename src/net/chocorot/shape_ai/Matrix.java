@@ -85,7 +85,7 @@ public class Matrix {
     public static long[][] reflect(long[][] rowVector) {
         // Validate the input is a 1xN matrix
         if (rowVector.length != 1) {
-            throw new IllegalArgumentException("Input must be a 1xN matrix." + rowVector.length);
+            throw new IllegalArgumentException("Input must be a 1xN matrix. Provided: " + rowVector.length);
         }
 
         // Step 1: Get the number of columns in the row vector
@@ -94,11 +94,11 @@ public class Matrix {
         // Step 2: Create a Nx1 matrix (column vector)
         long[][] columnVector = new long[n][1];
 
-        // Step 3: Copy values from the row vector to the column vector
+        // Step 3: Use a single System.arraycopy call to copy the entire row
         for (int i = 0; i < n; i++) {
             columnVector[i][0] = rowVector[0][i];
         }
 
-        return columnVector; // Return the column vector
+        return columnVector;
     }
 }
