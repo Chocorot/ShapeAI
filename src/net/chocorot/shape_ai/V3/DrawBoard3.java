@@ -338,8 +338,8 @@ public class DrawBoard3 extends JFrame {
 
     volatile boolean training;
     private void autoTrain() {
-        Image[] squareImages = loadImagesFromFolder("res/example/square");
-        Image[] circleImages = loadImagesFromFolder("res/example/circle");
+        Image[] squareImages = loadImagesFromFolder(weightLoc + "example/square");
+        Image[] circleImages = loadImagesFromFolder(weightLoc + "example/circle");
 
         training = true;
         SwingUtilities.invokeLater(() -> {
