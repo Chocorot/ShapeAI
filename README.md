@@ -1,12 +1,17 @@
 # Shape AI
 An AI that can recognise shape from drawing using perceptron algorithm.
-It have a 20x20 pixel drawing interface. Each pixel is a input for the AI.
+It have a drawing interface. Each pixel is a input for the AI.
 
 ## Version
 * V1
   This version only have one neurone to generate the output.
+  20x20 pixel input.
 * V2
   This version have not only one output neurone, it have 4 more hidden neurone.
+* V3
+  This version 16 hidden neurone on layer 1 and 4 hidden neurone on layer 2.
+  The drawing space has updated to 200x200 pixels.
+  Auto Training function has added, AI will be train from data inside res/example.
 
 ## How it work
 As the drawing box is 20x20, the box will store as a input by 1x400 matrix.<br>
