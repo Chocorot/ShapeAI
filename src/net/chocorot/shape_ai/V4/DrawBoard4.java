@@ -43,9 +43,6 @@ public class DrawBoard4 extends JFrame {
     JLabel resultLabel = new JLabel("Result:\t0", SwingConstants.CENTER);
     JLabel resultHighestText = new JLabel("Highest:\t0", SwingConstants.CENTER);
     JLabel resultLowestText = new JLabel("Lowest:\t0", SwingConstants.CENTER);
-    double previous_value = 0;
-    String direction = "up";
-    double tolerance = 0.01;
 
     double resultHighest = 0.5;
     double resultLowest = 0.5;
