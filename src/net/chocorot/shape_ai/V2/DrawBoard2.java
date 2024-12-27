@@ -195,23 +195,23 @@ public class DrawBoard2 extends JFrame {
 
     private void showWeight() {
         System.out.println("Result Neurone");
-        for (long[] i : reshapeMatrix(Matrix.read("res/V2/nr-weight.dat"), 4, 1)) {
+        for (long[] i : reshapeMatrix(Matrix.readV2("res/V2/nr-weight.dat"), 4, 1)) {
             System.out.println(Arrays.toString(i));
         }
         System.out.println("\n\nFirst Hidden Neurone");
-        for (long[] i : reshapeMatrix(Matrix.read("res/V2/n1-weight.dat"), drawBoardSize, drawBoardSize)) {
+        for (long[] i : reshapeMatrix(Matrix.readV2("res/V2/n1-weight.dat"), drawBoardSize, drawBoardSize)) {
             System.out.println(Arrays.toString(i));
         }
         System.out.println("\n\nSecond Hidden Neurone");
-        for (long[] i : reshapeMatrix(Matrix.read("res/V2/n2-weight.dat"), drawBoardSize, drawBoardSize)) {
+        for (long[] i : reshapeMatrix(Matrix.readV2("res/V2/n2-weight.dat"), drawBoardSize, drawBoardSize)) {
             System.out.println(Arrays.toString(i));
         }
         System.out.println("\n\nThird Hidden Neurone");
-        for (long[] i : reshapeMatrix(Matrix.read("res/V2/n3-weight.dat"), drawBoardSize, drawBoardSize)) {
+        for (long[] i : reshapeMatrix(Matrix.readV2("res/V2/n3-weight.dat"), drawBoardSize, drawBoardSize)) {
             System.out.println(Arrays.toString(i));
         }
         System.out.println("\n\nFourth Hidden Neurone");
-        for (long[] i : reshapeMatrix(Matrix.read("res/V2/n4-weight.dat"), drawBoardSize, drawBoardSize)) {
+        for (long[] i : reshapeMatrix(Matrix.readV2("res/V2/n4-weight.dat"), drawBoardSize, drawBoardSize)) {
             System.out.println(Arrays.toString(i));
         }
 

@@ -10,7 +10,7 @@ public class AI {
     private static final int bias = DrawBoard.bias;
 
     public static void testResult(long[][] pixelMatrix) {
-        long[][] weightMatrix = Matrix.read("res/V1/weight.dat");
+        long[][] weightMatrix = Matrix.readV2("res/V1/weight.dat");
         double result = Matrix.multiply(pixelMatrix, weightMatrix, drawBoardSize*drawBoardSize);
         System.out.print("Output: ");
         System.out.print(result);
@@ -27,7 +27,7 @@ public class AI {
     // Method to calculate the pixel matrix (black=1, white=0) as a 1D array
     public static void calculateMatrix(long[][] pixelMatrix) {
 
-        long[][] weightMatrix = Matrix.read("res/V1/weight.dat");
+        long[][] weightMatrix = Matrix.readV2("res/V1/weight.dat");
         double result = Matrix.multiply(pixelMatrix, weightMatrix, drawBoardSize*drawBoardSize);
         System.out.print("Output: ");
         System.out.print(result);
@@ -49,7 +49,7 @@ public class AI {
                 options[0]);
         // Square = 0, Circle = 1
         while (select == 1 && result<=bias) { // Human: Circle,  AI: Square
-            long[][] convertPixelMatrix = Matrix.reflect(pixelMatrix);
+            long[][] convertPixelMatrix = Matrix.transpose(pixelMatrix);
             weightMatrix = Matrix.plus(convertPixelMatrix, weightMatrix);
             Matrix.save(weightMatrix, "res/V1/weight.dat");
             result = Matrix.multiply(pixelMatrix, weightMatrix, drawBoardSize*drawBoardSize);
@@ -63,7 +63,7 @@ public class AI {
 
         }
         while(select == 0 && result>bias){ // Human: Square,  AI: Not Square
-            long[][] convertPixelMatrix = Matrix.reflect(pixelMatrix);
+            long[][] convertPixelMatrix = Matrix.transpose(pixelMatrix);
             weightMatrix = Matrix.subtract(weightMatrix, convertPixelMatrix);
             Matrix.save(weightMatrix, "res/V1/weight.dat");
             result = Matrix.multiply(pixelMatrix, weightMatrix, drawBoardSize*drawBoardSize);

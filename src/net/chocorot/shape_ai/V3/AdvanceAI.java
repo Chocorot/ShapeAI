@@ -21,12 +21,12 @@ public class AdvanceAI {
 //        initWeight();
         try {
             for (int i = 0; i < n0Weights.length; i++) {
-                n0Weights[i] = Matrix.read(DrawBoard3.weightLoc + "n0_" + i + "-weight.dat");
+                n0Weights[i] = Matrix.readV2(DrawBoard3.weightLoc + "n0_" + i + "-weight.dat");
             }
             for (int i = 0; i < n1Weights.length; i++) {
-                n1Weights[i] = Matrix.read(DrawBoard3.weightLoc + "n1_" + i + "-weight.dat");
+                n1Weights[i] = Matrix.readV2(DrawBoard3.weightLoc + "n1_" + i + "-weight.dat");
             }
-            nRWeight = Matrix.read(DrawBoard3.weightLoc + "nR-weight.dat");
+            nRWeight = Matrix.readV2(DrawBoard3.weightLoc + "nR-weight.dat");
         } catch (Exception ignored) {
             System.out.println("Weight data error");
         }
@@ -41,14 +41,14 @@ public class AdvanceAI {
                 while (n1[0][i] <= n1B[i]) { // doesn't fire when should
                     for (int j = 0; j < n0B.length; j++) { // Correct every n0 weight, n0 will be correct before n1
                         while (n0[0][j] <= n0B[j]) { // doesn't fire when should
-                            n0Weights[j] = Matrix.plus(n0Weights[j], Matrix.reflect(pixelMatrix));
+                            n0Weights[j] = Matrix.plus(n0Weights[j], Matrix.transpose(pixelMatrix));
                             Matrix.save(n0Weights[j], DrawBoard3.weightLoc + "n0_" + j + "-weight.dat");
                             n0[0][j] = Matrix.multiply(pixelMatrix, n0Weights[j], drawBoardSize * drawBoardSize);
                             printData(n0, n1, nR);
                         }
                         printData(n0, n1, nR);
                     }
-                    n1Weights[i] = Matrix.plus(n1Weights[i], Matrix.reflect(n0));
+                    n1Weights[i] = Matrix.plus(n1Weights[i], Matrix.transpose(n0));
                     Matrix.save(n1Weights[i], DrawBoard3.weightLoc + "n1_" + i + "-weight.dat");
                     n1[0][i] = Matrix.multiply(n0, n1Weights[i], n0[0].length);
                     printData(n0, n1, nR);
@@ -56,7 +56,7 @@ public class AdvanceAI {
 
             }
 
-            nRWeight = Matrix.plus(nRWeight, Matrix.reflect(n1));
+            nRWeight = Matrix.plus(nRWeight, Matrix.transpose(n1));
             Matrix.save(nRWeight, DrawBoard3.weightLoc + "nR-weight.dat");
             nR = Matrix.multiply(n1, nRWeight, n1[0].length);
             printData(n0, n1, nR);
@@ -67,14 +67,14 @@ public class AdvanceAI {
                 while (n1[0][i] > n1B[i]) { // fire when shouldn't
                     for (int j = 0; j < n0B.length; j++) { // Correct every n0 weight, n0 will be correct before n1
                         while (n0[0][j] > n0B[j]) { // fire when shouldn't
-                            n0Weights[j] = Matrix.subtract(n0Weights[j], Matrix.reflect(pixelMatrix));
+                            n0Weights[j] = Matrix.subtract(n0Weights[j], Matrix.transpose(pixelMatrix));
                             Matrix.save(n0Weights[j], DrawBoard3.weightLoc + "n0_" + j + "-weight.dat");
                             n0[0][j] = Matrix.multiply(pixelMatrix, n0Weights[j], drawBoardSize * drawBoardSize);
                             printData(n0, n1, nR);
                         }
                         printData(n0, n1, nR);
                     }
-                    n1Weights[i] = Matrix.subtract(n1Weights[i], Matrix.reflect(n0));
+                    n1Weights[i] = Matrix.subtract(n1Weights[i], Matrix.transpose(n0));
                     Matrix.save(n1Weights[i], DrawBoard3.weightLoc + "n1_" + i + "-weight.dat");
                     n1[0][i] = Matrix.multiply(n0, n1Weights[i], n0[0].length);
                     printData(n0, n1, nR);
@@ -82,7 +82,7 @@ public class AdvanceAI {
 
             }
 
-            nRWeight = Matrix.subtract(nRWeight, Matrix.reflect(n1));
+            nRWeight = Matrix.subtract(nRWeight, Matrix.transpose(n1));
             Matrix.save(nRWeight, DrawBoard3.weightLoc + "/nR-weight.dat");
             nR = Matrix.multiply(n1, nRWeight, n1[0].length);
             printData(n0, n1, nR);
@@ -141,6 +141,7 @@ public class AdvanceAI {
         Matrix.save(resultWeight, DrawBoard3.weightLoc + "nR-weight.dat");
         JOptionPane.showConfirmDialog(DrawBoard3.getInstance(), "The weight has been reset.", "Weight Reset", JOptionPane.DEFAULT_OPTION);
         System.out.println("Weight is being reset");
+
     }
 
 }

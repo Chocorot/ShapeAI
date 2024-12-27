@@ -11,11 +11,11 @@ public class AdvanceAI {
     int n1B = DrawBoard2.n1B, n2B = DrawBoard2.n2B, n3B = DrawBoard2.n3B, n4B = DrawBoard2.n4B, nrB = DrawBoard2.nrB;
 
     public void neuronTraining(long[][] pixelMatrix)  {
-        long[][] n1Weight = Matrix.read("res/V2/n1-weight.dat");
-        long[][] n2Weight = Matrix.read("res/V2/n2-weight.dat");
-        long[][] n3Weight = Matrix.read("res/V2/n3-weight.dat");
-        long[][] n4Weight = Matrix.read("res/V2/n4-weight.dat");
-        long[][] nrWeight = Matrix.read("res/V2/nr-weight.dat");
+        long[][] n1Weight = Matrix.readV2("res/V2/n1-weight.dat");
+        long[][] n2Weight = Matrix.readV2("res/V2/n2-weight.dat");
+        long[][] n3Weight = Matrix.readV2("res/V2/n3-weight.dat");
+        long[][] n4Weight = Matrix.readV2("res/V2/n4-weight.dat");
+        long[][] nrWeight = Matrix.readV2("res/V2/nr-weight.dat");
 
         nr = neuronResult(pixelMatrix);
 
@@ -36,31 +36,31 @@ public class AdvanceAI {
 
         while (select == 1 && nr<=nrB) { // Human: Circle,  AI: Square , Doesn't fire when it should, add
             while (nh[0][0]<=n1B) {
-                n1Weight = Matrix.plus(n1Weight, Matrix.reflect(pixelMatrix));
+                n1Weight = Matrix.plus(n1Weight, Matrix.transpose(pixelMatrix));
                 Matrix.save(n1Weight, "res/V2/n1-weight.dat");
                 nh[0][0] = Matrix.multiply(pixelMatrix, n1Weight, drawBoardSize*drawBoardSize);
                 printData(nh, nr);
             }
             while (nh[0][1]<=n2B) {
-                n2Weight = Matrix.plus(n2Weight, Matrix.reflect(pixelMatrix));
+                n2Weight = Matrix.plus(n2Weight, Matrix.transpose(pixelMatrix));
                 Matrix.save(n2Weight, "res/V2/n2-weight.dat");
                 nh[0][1] = Matrix.multiply(pixelMatrix, n2Weight, drawBoardSize*drawBoardSize);
                 printData(nh, nr);
             }
             while (nh[0][2]<=n3B) {
-                n3Weight = Matrix.plus(n3Weight, Matrix.reflect(pixelMatrix));
+                n3Weight = Matrix.plus(n3Weight, Matrix.transpose(pixelMatrix));
                 Matrix.save(n3Weight, "res/V2/n3-weight.dat");
                 nh[0][2] = Matrix.multiply(pixelMatrix, n3Weight, drawBoardSize*drawBoardSize);
                 printData(nh, nr);
             }
             while (nh[0][3]<=n4B) {
-                n4Weight = Matrix.plus(n4Weight, Matrix.reflect(pixelMatrix));
+                n4Weight = Matrix.plus(n4Weight, Matrix.transpose(pixelMatrix));
                 Matrix.save(n4Weight, "res/V2/n4-weight.dat");
                 nh[0][3] = Matrix.multiply(pixelMatrix, n4Weight, drawBoardSize*drawBoardSize);
                 printData(nh, nr);
             }
 
-            nrWeight = Matrix.plus(nrWeight, Matrix.reflect(nh));
+            nrWeight = Matrix.plus(nrWeight, Matrix.transpose(nh));
             Matrix.save(nrWeight, "res/V2/nr-weight.dat");
             nr = Matrix.multiply(nh, nrWeight, 4);
             printData(nh, nr);
@@ -68,31 +68,31 @@ public class AdvanceAI {
 
         while (select == 0 && nr>nrB) { // Human: Square,  AI: Circle , fire when it shouldn't, subtract
             while (nh[0][0]>n1B) {
-                n1Weight = Matrix.subtract(n1Weight, Matrix.reflect(pixelMatrix));
+                n1Weight = Matrix.subtract(n1Weight, Matrix.transpose(pixelMatrix));
                 Matrix.save(n1Weight, "res/V2/n1-weight.dat");
                 nh[0][0] = Matrix.multiply(pixelMatrix, n1Weight, drawBoardSize*drawBoardSize);
                 printData(nh, nr);
             }
             while (nh[0][1]>n2B) {
-                n2Weight = Matrix.subtract(n2Weight, Matrix.reflect(pixelMatrix));
+                n2Weight = Matrix.subtract(n2Weight, Matrix.transpose(pixelMatrix));
                 Matrix.save(n2Weight, "res/V2/n2-weight.dat");
                 nh[0][1] = Matrix.multiply(pixelMatrix, n2Weight, drawBoardSize*drawBoardSize);
                 printData(nh, nr);
             }
             while (nh[0][2]>n3B) {
-                n3Weight = Matrix.subtract(n3Weight, Matrix.reflect(pixelMatrix));
+                n3Weight = Matrix.subtract(n3Weight, Matrix.transpose(pixelMatrix));
                 Matrix.save(n3Weight, "res/V2/n3-weight.dat");
                 nh[0][2] = Matrix.multiply(pixelMatrix, n3Weight, drawBoardSize*drawBoardSize);
                 printData(nh, nr);
             }
             while (nh[0][3]>n4B) {
-                n4Weight = Matrix.subtract(n4Weight, Matrix.reflect(pixelMatrix));
+                n4Weight = Matrix.subtract(n4Weight, Matrix.transpose(pixelMatrix));
                 Matrix.save(n4Weight, "res/V2/n4-weight.dat");
                 nh[0][3] = Matrix.multiply(pixelMatrix, n4Weight, drawBoardSize*drawBoardSize);
                 printData(nh, nr);
             }
 
-            nrWeight = Matrix.subtract(nrWeight, Matrix.reflect(nh));
+            nrWeight = Matrix.subtract(nrWeight, Matrix.transpose(nh));
             Matrix.save(nrWeight, "res/V2/nr-weight.dat");
             nr = Matrix.multiply(nh, nrWeight, 4);
             printData(nh, nr);
@@ -100,11 +100,11 @@ public class AdvanceAI {
     }
 
     public long neuronResult(long[][] pixelMatrix) {
-        long[][] n1Weight = Matrix.read("res/V2/n1-weight.dat");
-        long[][] n2Weight = Matrix.read("res/V2/n2-weight.dat");
-        long[][] n3Weight = Matrix.read("res/V2/n3-weight.dat");
-        long[][] n4Weight = Matrix.read("res/V2/n4-weight.dat");
-        long[][] nrWeight = Matrix.read("res/V2/nr-weight.dat");
+        long[][] n1Weight = Matrix.readV2("res/V2/n1-weight.dat");
+        long[][] n2Weight = Matrix.readV2("res/V2/n2-weight.dat");
+        long[][] n3Weight = Matrix.readV2("res/V2/n3-weight.dat");
+        long[][] n4Weight = Matrix.readV2("res/V2/n4-weight.dat");
+        long[][] nrWeight = Matrix.readV2("res/V2/nr-weight.dat");
 
         nh[0][0] = Matrix.multiply(pixelMatrix, n1Weight, drawBoardSize*drawBoardSize);
         nh[0][1] = Matrix.multiply(pixelMatrix, n2Weight, drawBoardSize*drawBoardSize);

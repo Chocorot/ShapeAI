@@ -189,7 +189,7 @@ public class DrawBoard extends JFrame {
     }
 
     private void showWeight() {
-        long[][] weightMatrix = Matrix.read("res/V1/weight.dat");
+        long[][] weightMatrix = Matrix.readV2("res/V1/weight.dat");
         long[][] expandedMatrix = reshapeMatrix(weightMatrix, drawBoardSize, drawBoardSize);
         for (long[] i : expandedMatrix) {
             System.out.println(Arrays.toString(i));
